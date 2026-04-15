@@ -1,12 +1,17 @@
-from pydantic import BaseModel
-from dotenv import load_dotenv
-import os
+from pydantic_settings import BaseSettings
 
-load_dotenv()
 
-class Settings(BaseModel):
-    app_name: str = os.getenv("APP_NAME", "AI Engineer API")
-    environment: str = os.getenv("ENVIRONMENT", "local")
-    log_level: str = os.getenv("LOG_LEVEL", "info")
+class Settings(BaseSettings):
+    app_name: str = "AI Engineer API"
+    environment: str = "local"
+    log_level: str = "info"
+
+    # LLM config — vacío por ahora, Azure llegará después
+    llm_provider: str = "mock"  # "mock" | "azure"
+
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
 
 settings = Settings()
