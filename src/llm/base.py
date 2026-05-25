@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class BaseLLMClient(ABC):  # Abstract base class for LLM clients
+class BaseLLMClient(ABC):  
     """
     Abstract base class for LLM clients.
     Defines the contract that any LLM provider must follow.

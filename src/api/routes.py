@@ -3,16 +3,15 @@ from src.models.schemas import ChatRequest, ChatResponse
 from src.services.chat_service import ChatService
 from src.llm.base import BaseLLMClient
 from src.llm.mock_client import MockLLMClient
+from src.core.config import settings
 
 router = APIRouter()
 
 
 def get_llm_client() -> BaseLLMClient:
-    """
-    Dependency: returns the active LLM client.
-    In the future, this will read from settings to decide
-    which client to instantiate (mock vs azure).
-    """
+    if settings.llm_provider == "azure":
+        from src.llm.azure_client import AzureOpenAIClient
+        return AzureOpenAIClient()
     return MockLLMClient()
 
 
