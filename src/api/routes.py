@@ -28,8 +28,3 @@ def chat(
     service: ChatService = Depends(get_chat_service)
 ):
     return service.process(request)
-
-    #Borrar después de probar
-@router.get("/test-error")
-def test_error():
-    raise ValueError("Esto es un error de prueba")

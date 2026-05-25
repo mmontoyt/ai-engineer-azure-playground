@@ -10,15 +10,17 @@ app = FastAPI(
 
 app.include_router(router)
 
+
 @app.exception_handler(ValueError)
 async def value_error_handler(request: Request, exc: ValueError):
     return JSONResponse(
         status_code=400,
         content={
-            "error": "bad request",
+            "error": "bad_request",
             "detail": str(exc)
         }
     )
+
 
 @app.exception_handler(NotImplementedError)
 async def not_implemented_handler(request: Request, exc: NotImplementedError):
@@ -30,6 +32,7 @@ async def not_implemented_handler(request: Request, exc: NotImplementedError):
         }
     )
 
+
 @app.exception_handler(Exception)
 async def generic_error_handler(request: Request, exc: Exception):
     return JSONResponse(
@@ -39,6 +42,7 @@ async def generic_error_handler(request: Request, exc: Exception):
             "detail": "An unexpected error occurred"
         }
     )
+
 
 @app.get("/health")
 def health_check():
