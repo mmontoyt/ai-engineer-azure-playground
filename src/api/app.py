@@ -34,6 +34,7 @@ async def not_implemented_handler(request: Request, exc: NotImplementedError):
 
 
 @app.exception_handler(Exception)
+
 async def generic_error_handler(request: Request, exc: Exception):
     return JSONResponse(
         status_code=500,
